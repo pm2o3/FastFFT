@@ -1,4 +1,4 @@
-# 1ShotTrainer - Minimal dependencies for IllustriousXL FFT
+# FastFFT - Minimal dependencies for IllustriousXL FFT
 # CUDA 12.8 / Python 3.12 / RTX 5070 TI
 
 # Core ML
@@ -16,3 +16,4 @@ pillow>=11.0.0
 
 # Progress display
 tqdm>=4.67.0
+
