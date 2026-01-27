@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-1ShotTrainer - Minimal IllustriousXL Fine-Tune Trainer
+FastFFT - Minimal IllustriousXL Fine-Tune Trainer
 
 No GUI, no options - just run and train.
 
@@ -41,8 +41,8 @@ def check_model_exists():
 if __name__ == "__main__":
     print()
     print("╔══════════════════════════════════════════════════════════╗")
-    print("║          1ShotTrainer - IllustriousXL FFT                ║")
-    print("║          Style Training | No Bloat | Just Works         ║")
+    print("║               FastFFT - IllustriousXL FFT                ║")
+    print("║           Style Training | No Bloat | Just Works         ║")
     print("╚══════════════════════════════════════════════════════════╝")
     print()
 
@@ -51,3 +51,4 @@ if __name__ == "__main__":
 
     from Core.trainer import run_training
     run_training()
+
