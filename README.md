@@ -1,5 +1,5 @@
 # FastFFT
-A one click full fine tune engine for Illustrious, or any SDXL model I think. It's as simple as putting in a base model, putting in your tagged dataset, and running the train. Specifically, it's made for my 5070ti, but I think it'd work on most 16gb nvidia gpus. And boy, is it fast. If you require anything specific, it's simple enough to where you can just edit it in. If it's anything more than what mortals can handle, ask your coding agent of choice.
+A one click full fine tune engine for Illustrious, or any SDXL model I think. It's as simple as putting in a base model, putting in your tagged dataset, and running the train. Specifically, it's made for my 5070ti, but I think it'd work on most 16gb nvidia gpus. And boy, is it fast. If you require anything specific, it's simple enough to where you can just edit it in. If it's anything more than what mortals can handle, ask your coding agent of choice. I swear the little folder diagrams look better in the text document.
 
 # 1ShotTrainer
 
@@ -18,6 +18,7 @@ python train.py
 ## Folder Structure
 
 1ShotTrainer/
+
 ├── BaseModel/       ← Drop your .safetensors here
 ├── Dataset/         ← Your images (.png) + captions (.txt)
 ├── Cache/           ← Embedding cache (auto-generated)
@@ -33,6 +34,7 @@ python train.py
 Example:
 
 Dataset/
+
 ├── image001.png
 ├── image001.txt  # "1girl, solo, blue eyes, ..."
 ├── image002.png
@@ -43,6 +45,7 @@ Dataset/
 Checkpoints are saved as single `.safetensors` files:
 
 Outputs/
+
 ├── checkpoint_epoch_06.safetensors
 ├── checkpoint_epoch_08.safetensors
 ├── checkpoint_epoch_10.safetensors
