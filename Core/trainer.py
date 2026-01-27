@@ -1,5 +1,5 @@
 """
-1ShotTrainer Training Loop
+FastFFT Training Loop
 Full fine-tune training for IllustriousXL with style focus.
 """
 import gc
@@ -676,3 +676,4 @@ def run_training():
     trainer = IllustriousTrainer()
     trainer.setup()
     trainer.train()
+
