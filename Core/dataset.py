@@ -1,5 +1,5 @@
 """
-1ShotTrainer Dataset
+FastFFT Dataset
 Simple dataset loader for pre-tagged images with embedding caching.
 Supports aspect ratio bucketing for variable-sized images.
 """
@@ -314,3 +314,4 @@ def collate_fn(batch: list[dict]) -> dict:
         "crop_coords": [b["crop_coords"] for b in batch],
         "target_sizes": [b["target_size"] for b in batch],
     }
+
