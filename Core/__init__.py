@@ -1,1 +1,2 @@
-# 1ShotTrainer Core Module
+# FastFFT Core Module
+
