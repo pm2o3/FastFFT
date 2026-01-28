@@ -66,10 +66,11 @@ class AspectRatioBucketSampler:
         self.dataset = dataset
         self.batch_size = batch_size
         self.shuffle = shuffle
-        
-        # Group indices by aspect ratio bucket
-        self.buckets = defaultdict(list)
-        for idx, (img_path, _) in enumerate(dataset.samples):
+        self.repeats = getattr(dataset, 'repeats', 1)
+
+        # First, determine bucket for each original sample
+        sample_buckets = {}
+        for orig_idx, (img_path, _) in enumerate(dataset.samples):
             # Get dimensions from cache or image
             cache_path = dataset._get_cache_path(img_path)
             if cache_path.exists():
@@ -80,10 +81,16 @@ class AspectRatioBucketSampler:
                     # Determine target bucket (will be resized during caching)
                     target_w, target_h = get_target_resolution(img.width, img.height)
                     size = (target_h, target_w)  # (height, width) format
+            sample_buckets[orig_idx] = size
 
-            # Create bucket key from dimensions
-            bucket_key = size
-            self.buckets[bucket_key].append(idx)
+        # Group all indices (including repeats) by aspect ratio bucket
+        self.buckets = defaultdict(list)
+        num_samples = len(dataset.samples)
+        for repeat in range(self.repeats):
+            for orig_idx in range(num_samples):
+                idx = repeat * num_samples + orig_idx
+                bucket_key = sample_buckets[orig_idx]
+                self.buckets[bucket_key].append(idx)
         
         # Pre-compute all batches
         self._create_batches()
@@ -151,7 +158,8 @@ class ImageCaptionDataset(Dataset):
         
         # Find all image-caption pairs
         self.samples = self._find_samples()
-        print(f"Found {len(self.samples)} image-caption pairs")
+        self.repeats = CONFIG.repeats
+        print(f"Found {len(self.samples)} image-caption pairs (x{self.repeats} repeats = {len(self.samples) * self.repeats} effective samples)")
         
         # Pre-compute and cache embeddings
         self._cache_embeddings()
@@ -285,10 +293,12 @@ class ImageCaptionDataset(Dataset):
         return prompt_embeds, pooled_prompt_embeds
     
     def __len__(self) -> int:
-        return len(self.samples)
-    
+        return len(self.samples) * self.repeats
+
     def __getitem__(self, idx: int) -> dict:
-        img_path, _ = self.samples[idx]
+        # Map repeated index back to actual sample index
+        actual_idx = idx % len(self.samples)
+        img_path, _ = self.samples[actual_idx]
         cache_path = self._get_cache_path(img_path)
         
         # Load from cache
@@ -314,4 +324,3 @@ def collate_fn(batch: list[dict]) -> dict:
         "crop_coords": [b["crop_coords"] for b in batch],
         "target_sizes": [b["target_size"] for b in batch],
     }
-
