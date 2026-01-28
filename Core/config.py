@@ -17,7 +17,8 @@ class TrainingConfig:
     cache_dir: Path = Path("Cache")
     
     # === Training Parameters ===
-    unet_learning_rate: float = 1e-5
+    # Learning rates - higher for Adafactor + cosine schedule
+    unet_learning_rate: float = 5e-6
     text_encoder_learning_rate: float = 1e-6
     
     # Batch settings - optimized for 16GB VRAM
@@ -33,6 +34,7 @@ class TrainingConfig:
 
     # Learning rate schedule
     lr_scheduler: str = "cosine"
+    # warmup is now dynamic: 5% of total steps, min 10, max 100
     
     # Memory optimization
     gradient_checkpointing: bool = True
@@ -41,18 +43,15 @@ class TrainingConfig:
     # VRAM optimization - for tight 16GB fits
     freeze_text_encoders: bool = True   # Saves ~2GB VRAM, recommended for style training
     offload_vae: bool = True            # Offload VAE to CPU after caching
-    use_torch_compile: bool = False     # Enable torch.compile
+    use_torch_compile: bool = False     # Enable torch.compile (experimental, can speed up)
     
     # Nuclear VRAM option - trade speed for memory
     blocks_to_swap: int = 0             # Number of UNet blocks to swap to CPU (experimental, 0=disabled)
     
     # Dataset
     resolution: int = 1024  # Base resolution, aspect ratios handled automatically
-    
-    # Seed for reproducibility
-    seed: int = 42
+    repeats: int = 5       # Number of times to repeat each image per epoch (increases training steps)
 
 
 # Global config instance
 CONFIG = TrainingConfig()
-
