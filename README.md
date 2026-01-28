@@ -1,5 +1,5 @@
 # FastFFT
-A one click full fine tune engine for Illustrious, or any SDXL model I think. It's as simple as putting in a base model, putting in your tagged dataset, and running the train. Specifically, it's made for my 5070ti, but I think it'd work on most 16gb nvidia gpus. And boy, is it fast. If you require anything specific, it's simple enough to where you can just edit it in. If it's anything more than what mortals can handle, ask your coding agent of choice. I swear the little folder diagrams look better in the text document.
+A one click full fine tune engine for Illustrious, or any SDXL model I think. It's as simple as putting in a base model, putting in your tagged dataset, and running the train. Specifically, it's made for my 5070ti, but I think it'd work on most 16gb nvidia gpus. And boy, is it fast. If you require anything specific, it's simple enough to where you can just edit it in. If it's anything more than what mortals can handle, ask your coding agent of choice. I swear the little folder diagrams look better in the text document. It's probably horribly broken right now, but as far as simple Kohya alternatives for fine tunes go we don't have many options now do we?
 
 ## Quick Start
 
