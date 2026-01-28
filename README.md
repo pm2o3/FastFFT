@@ -6,7 +6,7 @@ A one click full fine tune engine for Illustrious, or any SDXL model I think. It
 # 1. Install dependencies
 pip install -r requirements.txt
 
-# 2. Place base model .safetensors in BaseModel/
+# 2. Place base model .safetensors in BaseModel/ and tagged dataset in Dataset/
 
 # 3. Train
 python train.py
