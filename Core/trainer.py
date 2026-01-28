@@ -676,4 +676,3 @@ def run_training():
     trainer = IllustriousTrainer()
     trainer.setup()
     trainer.train()
-
